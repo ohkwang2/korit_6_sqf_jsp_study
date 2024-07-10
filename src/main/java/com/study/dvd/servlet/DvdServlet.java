@@ -13,10 +13,15 @@ import com.study.dvd.dao.DvdDao;
 @WebServlet("/dvd/list")
 public class DvdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.getWriter().println(DvdDao.searchDvdByTitle(null).toString());
+		resp.setContentType("text/html");
+		resp.setCharacterEncoding("utf-8"); 
+		
+		resp.getWriter().println(DvdDao.searchDvdByTitle("¹Ú"));
 	}
 
 
