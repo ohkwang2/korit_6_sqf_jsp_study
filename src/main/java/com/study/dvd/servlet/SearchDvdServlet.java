@@ -10,19 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.study.dvd.dao.DvdDao;
 
-@WebServlet("/dvd/list")
-public class DvdServlet extends HttpServlet {
+@WebServlet("/search")
+public class SearchDvdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/html");
-		resp.setCharacterEncoding("utf-8"); 
+//		resp.setContentType("text/html");
+//		resp.setCharacterEncoding("utf-8"); 
+//		
+//		resp.getWriter().println(DvdDao.searchDvdByTitle("¹Ú"));
 		
-		resp.getWriter().println(DvdDao.searchDvdByTitle("¹Ú"));
+		req.getRequestDispatcher("/WEB-INF/views/search_dvd.jsp").forward(req, resp);
 	}
-
-
 }

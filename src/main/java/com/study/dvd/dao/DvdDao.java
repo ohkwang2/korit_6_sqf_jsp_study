@@ -17,10 +17,12 @@ public class DvdDao {
 		List<Dvd> dvds = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		// 일반적으로 select문을 사용하여 조회한 Table을 리턴해주어야 할 때 사용
+		// 생성한 index를 바로 조회해서 사용할 때도 resultSet을 사용하기도 함
 		ResultSet rs = null;
 		
 		try {
-			// db 연결
+			// db 연결 pool을 생성하여 DB 연결
 			con = pool.getConnection();
 			// 기본 sql문 생성
 			StringBuilder sql = new StringBuilder();
