@@ -1,7 +1,7 @@
 
 function handleSearchButtonClick() {
 	const searchInput = document.querySelector(".search-input");
-	location.href = `http://localhost:8080/dvd/search/producer?searchText=${searchInput.value}`;
+	location.href = `http://localhost:8080/dvd/producer/search?searchText=${searchInput.value}`;
 }
 
 function handleInputKeyDown(e) {

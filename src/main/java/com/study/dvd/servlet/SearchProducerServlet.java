@@ -9,7 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet("/search/producer")
+@WebServlet("/producer/search")
+// 해당 Mapping의 주소로 요청이 들어올 경우 무조건 req, resp생성
+// but, doGet이 없을 경우 405 메세지 에러 생성
+// 주소를 쳤는데, Mapping 주소가 없으면 404 메세지 생성
+// Mapping 주소도 있고, req, resp를 매개변수로 활용하는 메소드가 있을 경우 200 메세지 출력
 public class SearchProducerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	

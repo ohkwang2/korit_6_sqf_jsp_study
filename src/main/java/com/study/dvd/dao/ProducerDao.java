@@ -4,8 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.List;import com.mysql.cj.xdevapi.Statement;
 import com.study.dvd.entity.Producer;
 import com.study.dvd.util.DBConnectionMgr;
 
@@ -46,5 +45,31 @@ public class ProducerDao {
 		
 		System.out.println(producers);
 		return producers;
+	}
+	
+	public static int save(Producer producer) {
+		int successCount = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			con = pool.getConnection();
+			String sql = "insert into producer_tb values(0, ?)";
+			pstmt = con.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS);
+			pstmt.setString(1, producer.getProducerName());
+			successCount = pstmt.executeUpdate();
+			rs = pstmt.getGeneratedKeys();
+			while(rs.next()) {
+				producer.setProducerId(rs.getInt(1));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			pool.freeConnection(con, pstmt, rs);
+		}
+		
+		return successCount;
 	}
 }

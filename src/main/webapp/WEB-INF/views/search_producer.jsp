@@ -3,6 +3,11 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	// 여기서 params값(searchText은 js에서 작성한 params값과 맞춰주야 함
+	String searchText = request.getParameter("searchText");
+	List<Producer> producers = ProducerDao.seachProducerByProducerName(searchText);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,10 +37,6 @@
 			onKeyDown = "handleInputKeyDown()">
 		<button onClick="handleSearchButtonClick()">검색</button>
 	</div>
-	<%
-		String searchText = request.getParameter("searchText");
-		List<Producer> producers = ProducerDao.seachProducerByProducerName(searchText);
-	%>
 	<table>
 		<thead>
 			<tr>
@@ -44,13 +45,17 @@
 			</tr>
 		</thead>
 		<tbody>
-			<%for(Producer producer: producers) {
-				%>
-			<tr>
-				<td><%= producer.getProducerId() %></td>
-				<td><%= producer.getProducerName() %></td>
-			</tr>
-			<%	} %>
+			<%
+				// JSTL (JSP Standard Tag Library)
+				for(Producer producer: producers) {
+			%>
+				<tr>
+					<td><%= producer.getProducerId() %></td>
+					<td><%= producer.getProducerName() %></td>
+				</tr>
+			<%
+				};
+			%>
 			
 		</tbody>
 	
